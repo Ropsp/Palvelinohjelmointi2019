@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.bookstoreproject.domain.Book;
 import com.example.bookstoreproject.domain.BookRepository;
+import com.example.bookstoreproject.domain.Category;
+import com.example.bookstoreproject.domain.CategoryRepository;
 
 
 
@@ -22,14 +24,16 @@ public class BookstoreprojectApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository) {
+	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository) {
 		return (args) -> {
 			log.info("save a book");
-			repository.save(new Book("title", "author", 2005, 1234, 20));
+			crepository.save(new Category("fiction"));
+			
+			brepository.save(new Book("title", "author", 2005, 1234, 20, crepository.findByName("fiction").get(0)));
 			//String title, String author, Integer year, Integer isbn, Integer price
 			
 			log.info("fetch all books");
-			for (Book book : repository.findAll()) {
+			for (Book book : brepository.findAll()) {
 				log.info(book.toString());
 			}
 
