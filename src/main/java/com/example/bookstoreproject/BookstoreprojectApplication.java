@@ -29,7 +29,7 @@ public class BookstoreprojectApplication {
 			log.info("save a book");
 			crepository.save(new Category("fiction"));
 
-			brepository.save(new Book("title", "author", 2005, 1234, 20, crepository.findByName("fiction").get(0)));
+			brepository.save(new Book("title", "author", 2005, 1234, 20, crepository.findByname("fiction").get(0)));
 			// String title, String author, Integer year, Integer isbn, Integer price
 
 			// Create users: admin/admin user/user
